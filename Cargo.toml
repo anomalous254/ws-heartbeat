@@ -1,0 +1,31 @@
+[package]
+name = "ws-heartbeat"
+version = "0.1.0"
+edition = "2024"
+description = "Framework-agnostic WebSocket heartbeat tracking with a single background sweeper"
+license = "Apache-2.0"
+repository = "https://github.com/anomalous254/ws-heartbeat"
+readme = "README.md"
+keywords = ["websocket", "heartbeat", "ping", "actix", "axum"]
+categories = ["network-programming", "web-programming::websocket", "asynchronous"]
+
+[dependencies]
+async-trait = "0.1"
+dashmap = "6"
+tokio = { version = "1", features = ["rt", "time","sync"] }
+tracing = "0.1"
+
+# Optional: only downloaded if the user turns the feature on
+actix-ws = { version = "0.3", optional = true }
+axum = { version = "0.8", features = ["ws"], optional = true }
+
+[features]
+default = []
+actix = ["dep:actix-ws"]
+axum = ["dep:axum"]
+
+[dev-dependencies]
+tokio = { version = "1", features = ["full"] }
+
+[package.metadata.docs.rs]
+all-features = true
